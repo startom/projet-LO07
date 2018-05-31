@@ -1,0 +1,189 @@
+
+*
+{
+	margin: 0;
+	padding: 0;
+	font-family: Comic Sans MS;
+	color: black;
+	text-decoration: none;
+}
+
+header
+{
+	width: 100%;
+	height: 50px;
+	background-color: #49abfc;
+}
+
+footer
+{
+	width: 100%;
+	height: 300px;
+	background-color: #49abfc;
+}
+
+body
+{
+        text-align:center;
+}
+
+nav
+{
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	z-index: 255;
+}
+
+.bouton
+{
+	height: 50px;
+	width: 200px;
+	
+	border-left:1px solid black;
+	background-color: #49abfc;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bouton2
+{
+    width: 120px;
+    background-color: #29db2f;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    text-decoration: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.bouton:hover
+{
+	border-top:4px solid greenyellow;
+}
+
+.marge
+{
+	flex: 1;
+	height: 50px;
+	background-color: #49abfc;
+	border-left:1px solid black;
+}
+
+.titre
+{
+        
+}
+
+form
+{
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 10px;
+        margin-bottom: 40px;
+}
+
+.cadre
+{
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 10px;
+        margin-bottom: 40px;
+}
+
+div > p
+{
+        padding: 10px;
+}
+
+fieldset > p
+{
+        padding: 10px;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number]
+{
+        width: 100%;
+        margin-top:10px;
+        padding: 10px 16px;
+        border: 2px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+        
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus {
+        border: 2px solid #555;
+}
+
+input[type=textarea]
+{
+        width: 100%;
+        margin-top:10px;
+        padding: 10px 16px;
+        border: 2px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+}
+
+.inline
+{
+        display:inline;
+}
+
+h2
+{
+        margin-top: 20px;
+        margin-bottom: 8px;
+}
+
+.form_radio
+{
+        display: flex;
+	flex-direction: row;
+}
+
+input[type=submit], input[type=reset]
+{
+        width: 120px;
+        background-color: #29db2f;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        text-decoration: none;
+        margin: 4px 14px;
+        cursor: pointer;
+}
+
+.langues{
+        
+}
+
+fieldset{
+        padding:0 20px 20px 20px;
+        margin-bottom:10px;
+        border:1px solid #49abfc;
+}
+
+textarea
+{
+        width: 100%;
+        margin-top:10px;
+        padding: 10px 16px;
+        border: 2px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+        resize: none;
+        
+}
