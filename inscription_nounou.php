@@ -13,7 +13,7 @@
         <?php include("nav.php"); ?>
 
         <h2 class="titre">Inscription nounou sur [nom du site]</h2><br/>
-        <form class="signup_nounou" method="post" action="traitement_inscription_nounou.php">
+        <form class="signup_nounou" method="post" action="traitement_inscription.php">
             <div>
                 <fieldset>
                     <legend> Identifiants </legend>
@@ -64,12 +64,13 @@
                         <textarea name="experience" id="experience" rows="3" cols="35" placeholder="Experience personelle (255 caractères max)"></textarea>
                     </p>
                     
+                    <input type='hidden' value='0' name='type'>
+                    
                     <p>
                     <input type="submit" value="Envoyer"/>
                     <input type="reset" value="Effacer"/>
                     </p>
                     
-                    <input type='hidden' value='0' name='type'>
                     
                 </fieldset>
             </div>

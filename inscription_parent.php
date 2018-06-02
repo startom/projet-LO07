@@ -13,7 +13,7 @@
         <?php include("nav.php"); ?>
 
         <h2 class="titre">Inscription parent sur [nom du site]</h2><br/>
-        <form class="formulaire" method="post" action="traitement_inscription_parent.php">
+        <form class="formulaire" method="post" action="traitement_inscription.php">
             <div>
                 <p>
                 <label for="lnom">Nom </label>
@@ -27,13 +27,15 @@
                 
                 <p>
                 <label for="ltelephone">Téléphone </label>
-                <input id="ltelephone" type="text" name="telephone" placeholder="Votre numéro de téléphone" required="true">
+                <input id="ltelephone" type="number" name="telephone" placeholder="Votre numéro de téléphone" required="true">
                 </p>
                 
                 <p>
                 <label for="lmdp">Mot de passe </label>
                 <input id="lmdp" type="password" name="mdp" placeholder="Votre mot de passe" required="true">
                 </p>
+                
+                <input type='hidden' value='1' name='type'>
                 
                 <p>
                     <input type="submit" value="Envoyer"/>

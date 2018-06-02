@@ -38,7 +38,10 @@
             </p>
             <h3>Garde d'enfant en langue étrangère</h3>
             <p>
-                cc
+                Certaines de nos nounous proposent aussi une garde pour les enfants plus familiers avec une langue<br>
+                étrangère. Pour rechercher une garde dans une langue étrangère, séléctionnez "Langues étrangères"<br>
+                sous la barre de recherche de la page d'acceuil.<br/>
+                Le salaire des nounous est de 15 € par heure commencée et par enfant.<br/>
             </p>
             
         </div>
