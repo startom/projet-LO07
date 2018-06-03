@@ -50,33 +50,40 @@
                                     $result = $mysqli->query($sql);
                                     $get_info = $result->fetch_row();
                                     
-                                    if ($_POST['francais'])
+                                    if (isset($_POST['francais']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'francais'.'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'francais'.'\')';
+                                        $mysqli->query($sql);
                                     }
-                                    if ($_POST['anglais'])
+                                    if (isset($_POST['anglais']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'anglais'.'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'anglais'.'\')';
+                                        $mysqli->query($sql);
                                     }
-                                    if ($_POST['chinois'])
+                                    if (isset($_POST['chinois']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'chinois'.'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'chinois'.'\')';
+                                        $mysqli->query($sql);
                                     }
-                                    if ($_POST['espagnol'])
+                                    if (isset($_POST['espagnol']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'espagnol'.'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'espagnol'.'\')';
+                                        $mysqli->query($sql);
                                     }
-                                    if ($_POST['allemand'])
+                                    if (isset($_POST['allemand']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'allemand'.'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'allemand'.'\')';
+                                        $mysqli->query($sql);
                                     }
-                                    if ($_POST['arabe'])
+                                    if (isset($_POST['arabe']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'arabe'.'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.'arabe'.'\')';
+                                        $mysqli->query($sql);
                                     }
-                                    if ($_POST['autre_langue'])
+                                    if (isset($_POST['autre_langue']))
                                     {
-                                        'INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.$_POST['autre_langue'].'\')';
+                                        $sql='INSERT INTO pratiquelangue (idN, langue) VALUES (\''.$get_info[0].'\',\''.$_POST['autre_langue'].'\')';
+                                        $mysqli->query($sql);
                                     }
                                     
                                     

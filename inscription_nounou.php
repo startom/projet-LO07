@@ -57,7 +57,7 @@
                         <input type="checkbox" name="espagnol"/>Espagnol<br />
                         <input type="checkbox" name="allemand"/>Allemand<br />
                         <input type="checkbox" name="arabe"/>Arabe<br />
-                        <input id="autre_langue" type="text" name="autrelangue" placeholder="Autre langue parlée">
+                        <input id="autre_langue" type="text" name="autre_langue" placeholder="Autre langue parlée">
                     </p>
                     
                     <p>
