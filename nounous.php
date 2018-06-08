@@ -36,7 +36,7 @@
                     echo 'id nounou'.$i.' = '.$nounou[$i].'<br/>';
                 }
                                 
-                                
+        $mysqli->close();                        
         ?>
 
         <footer>

@@ -108,9 +108,9 @@ nav
 	border-left:1px solid black;
 }
 
-.titre
+.statut_nounou
 {
-        
+        margin: 20px;
 }
 
 form
@@ -285,6 +285,7 @@ textarea
 
 .colonne
 {
+        width: 50%;
         display: flex;
 	flex-direction: column;
         position: relative;

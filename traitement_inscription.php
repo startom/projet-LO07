@@ -43,7 +43,7 @@
                                     $result = $mysqli->query($sql2);
                                     
                                     $get_info = $result->fetch_row();
-                                    $sql='INSERT INTO nounou (nom,prenom,telephone,ville,experience,idU) VALUES (\''.$_POST['nom'].'\',\''.$_POST['prenom'].'\',\''.$_POST['telephone'].'\',\''.$_POST['ville'].'\',\''.$_POST['experience'].'\',\''.$get_info[0].'\')';
+                                    $sql='INSERT INTO nounou (nom,prenom,telephone,ville,experience,idU,age) VALUES (\''.$_POST['nom'].'\',\''.$_POST['prenom'].'\',\''.$_POST['telephone'].'\',\''.$_POST['ville'].'\',\''.$_POST['experience'].'\',\''.$get_info[0].'\',\''.$_POST['age'].'\')';
                                     $mysqli->query($sql);
                                     
                                     $sql='SELECT n.idNounou FROM nounou n WHERE n.idU = \''.$get_info[0].'\'';
@@ -106,13 +106,13 @@
                                         goto error;
                                     }
                                     
-                                    $sql='INSERT INTO utilisateur (email,mdp,type) VALUES (\''.$_POST['email'].'\',\''.$_POST['mdp'].'\',\''.'1'.'\')';
+                                    $sql='INSERT INTO utilisateur (email,mdp,type) VALUES (\''.$_POST['email'].'\',\''.$_POST['mdp'].'\',\''.'0'.'\')';
                                     $mysqli->query($sql);
                                     
                                     $result = $mysqli->query($sql2);
                                     $get_info = $result->fetch_row();
                                     
-                                    $sql='INSERT INTO parent (nom,telephone,idU) VALUES (\''.$_POST['nom'].'\',\''.$_POST['telephone'].'\',\''.$get_info[0].'\')';
+                                    $sql='INSERT INTO parent (nom,telephone,idU,mdp) VALUES (\''.$_POST['nom'].'\',\''.$_POST['telephone'].'\',\''.$get_info[0].'\',\''.$_POST['mdp'].'\')';
                                     $mysqli->query($sql);
                                     
                                     $_SESSION['email']=$_POST['email'];
