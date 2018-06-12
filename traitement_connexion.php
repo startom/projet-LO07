@@ -37,6 +37,7 @@
             else
             {
                 $_SESSION['email']=$_POST['email'];
+                echo '<div class="texte"><br/>Vous êtes maintenant connécté(e)</div>';
             }
                                 
                                 

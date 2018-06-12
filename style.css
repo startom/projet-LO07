@@ -208,6 +208,23 @@ input[type=submit], input[type=reset]
         cursor: pointer;
 }
 
+.form_affectation
+{
+        display: flex;
+	flex-direction: row;
+}
+
+input[type=submit] .bout_accepter
+{
+        margin: 10px 3px;
+}
+
+input[type=submit] .bout_refuser
+{
+        margin: 10px 3px;
+        background-color: #db1818;
+}
+
 .langues
 {
         

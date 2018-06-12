@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Bienvenue sur [nom du site]</title>
+        <title>Mon compte</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript" src="js.js"></script>
     </head>
@@ -17,9 +17,17 @@
 
         <?php
         
-        if(isset($_POST['cc'])){
-            echo 'd bar';
+        if(isset($_POST['etat']))
+        {
+            if($_POST['etat'] == 1){
+                echo 'd bar';
+                echo $_POST['idNounou'];
+            }
+            else if ($_POST['etat'] == -1){
+                echo 'dommage';
+            }
         }
+        
         
         
             $mysqli = new mysqli('localhost', 'utilisateur', 'utilisateur', 'mydb');
@@ -69,11 +77,16 @@
                         }
                         $get_info_nb_enfants = $result->fetch_row();
                         
-                        echo 'Vous avez '.$get_info_nb_enfants[0].' enfants enregistrés<br/>';
+                        echo 'Vous avez '.$get_info_nb_enfants[0].' enfants enregistrés<br/><br/>';
                         
                         for ($i = 0; $i < $get_info_nb_enfants[0]; $i++){
                             //afficher les enfants
                         }
+                        ?>
+                        <form method="post" action="enregistrer_enfant.php">
+                            <input type="submit" value="Enregistrer un enfant">
+                        </form>
+                        <?php
                         
                         
                         ?>
@@ -159,14 +172,18 @@
                                 }
                                 echo 'Experience: '.$get_info2[5].'</div>';
                                 ?>
+                            <div class="form_affectation">
                             <form method="post" action="#">
-                                <input type="hidden" name="cc" value="1">
-                                <input type="submit" value="cc">
+                                <input type="hidden" name="idNounou" value=$get_info2[0]>
+                                <input type="hidden" name="etat" value="1">
+                                <input class="bout_accepter" type="submit" value="Accepter">
                             </form>
                             <form method="post" action="#">
-                                <input type="hidden" name="cc" value="-1">
-                                <input type="submit" value="cc2">
+                                <input type="hidden" name="idNounou" value=$get_info2[0]>
+                                <input type="hidden" name="etat" value="-1">
+                                <input class="bout_refuser" type="submit" value="Refuser">
                             </form>
+                            </div>
                             <?php
                             }
                             
