@@ -195,7 +195,7 @@ function flex() {
   var htmlObject = document.createElement('div');
   let s = [];
   const listeJours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-  if (document.getElementById('work').checked) {
+  if (document.getElementById('semaine').checked) {
     jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi'];
   } else if (document.getElementById('weekend').checked) {
     jours = ['Samedi','Dimanche']
