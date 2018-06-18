@@ -39,15 +39,11 @@ const frDate = {
 
 const timepickerOptions = {
   twelveHour: false,
-  defaultTime: '12:00',
+  defaultTime: '00:00',
   onSelect: function() {this.done()}
 }
 
 const texthoraire = `
-  <div class="input-field col s4">
-    <label>Date :</label>
-    <input type="text" class="datepicker" name="jours[]">
-  </div>
   <div class="input-field col s4">
     <label>Heure de début :</label>
     <input type="text" class="timepicker" name="debut[]">
@@ -85,9 +81,6 @@ const envoyer = `<button class="btn-large  waves-orange" type="submit">Envoyer
   <i class="material-icons right">send</i>
 </button><br><br>`;
 
-const textsome = texthoraire + `<br><br>
-<a id="add" class="btn-floating btn-large waves-effect waves-light" onclick="add()"><i class="material-icons">add</i></a>
-<br><br>`+ envoyer;
 
 const heures = `<div class="input-field col s6">
   <label>Heure de début</label>
@@ -103,18 +96,19 @@ function displayJours(jours) {
   jours.forEach((jour) => {
     text += `
     <div class="row">
-      <div class="input-field col s2">
-        <p class="right"> ${jour} </p>
-      </div>
-      <div class="input-field col s5">
-        <label>Heure de début</label>
-        <input type="text" class="timepicker" name="debut[]">
-      </div>
-      <div class="input-field col s5">
-        <label>Heure de fin</label>
-        <input type="text" class="timepicker" name="fin[]">
-      </div>
-    </div>`;
+    <div class="input-field col s2">
+      <p class="right"> ${jour} </p>
+      <a id="add" class="btn-floating btn-large waves-effect waves-light" onclick="add()"><i class="material-icons">add</i></a>
+    </div>
+    <div class="input-field col s5">
+      <label>Heure de début</label>
+      <input type="text" class="timepicker" name="debut[]">
+    </div>
+    <div class="input-field col s5">
+      <label>Heure de fin</label>
+      <input type="text" class="timepicker" name="fin[]">
+    </div>
+  </div>`;
   })
   text += envoyer;
   return text;
@@ -130,8 +124,6 @@ function add() {
   htmlObject.innerHTML = texthoraire;
   const btn = document.getElementById("add");
   document.getElementById('test').insertBefore(htmlObject, btn);
-  var date = document.querySelectorAll('.datepicker');
-  M.Datepicker.init(date, {format: 'dddd dd mmmm yyyy',i18n: frDate});
   var heure = document.querySelectorAll('.timepicker');
   M.Timepicker.init(heure, timepickerOptions);
 }
@@ -139,6 +131,7 @@ function add() {
 function regu() {
   if (step1) {
     step1.remove();
+    step3.remove();
   }
   if (step2) {
     step2.remove();
@@ -177,24 +170,6 @@ function custom() {
 }
 function test(e) {
   console.log();;
-}
-function some() {
-  if (step1) {
-    step1.remove();
-  }
-  if (step2) {
-    step2.remove();
-  }
-  var htmlObject = document.createElement('div');
-  htmlObject.innerHTML = textsome;
-  htmlObject.className = 'row';
-  htmlObject.id = 'test';
-  document.getElementById("form").appendChild(htmlObject);
-  step1 = htmlObject;
-  var date = document.querySelectorAll('.datepicker');
-  M.Datepicker.init(date, {format: 'dd/mm/yyyy',i18n: frDate});
-  var heure = document.querySelectorAll('.timepicker');
-  M.Timepicker.init(heure, timepickerOptions);
 }
 
 function fixe() {
@@ -235,6 +210,7 @@ function flex() {
   M.AutoInit();
   var heure = document.querySelectorAll('.timepicker');
   M.Timepicker.init(heure, timepickerOptions);
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {
