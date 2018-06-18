@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 31 mai 2018 à 18:03
+-- Généré le :  lun. 18 juin 2018 à 10:08
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -31,8 +31,18 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `administrateur`;
 CREATE TABLE IF NOT EXISTS `administrateur` (
   `idU` int(11) NOT NULL,
+  `idAdmin` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idAdmin`),
   KEY `idU` (`idU`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `administrateur`
+--
+
+INSERT INTO `administrateur` (`idU`, `idAdmin`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -121,6 +131,17 @@ CREATE TABLE IF NOT EXISTS `jour_r` (
 -- --------------------------------------------------------
 
 --
+-- Doublure de structure pour la vue `nb_candidatures`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `nb_candidatures`;
+CREATE TABLE IF NOT EXISTS `nb_candidatures` (
+`nombre` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `nounou`
 --
 
@@ -135,16 +156,34 @@ CREATE TABLE IF NOT EXISTS `nounou` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `statut` int(11) NOT NULL DEFAULT '0',
+  `note` int(11) DEFAULT NULL,
+  `age` int(3) NOT NULL,
   PRIMARY KEY (`idNounou`),
   KEY `idU_idx` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `nounou`
 --
 
-INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experience`, `nom`, `prenom`, `statut`) VALUES
-(2, NULL, 'qsreqer', 10, 'sjqw', 'sfthswrth', 'urkters', 'tqezrtgdrtght qzev tdebryugsdbr ydnt(jsr', 0);
+INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experience`, `nom`, `prenom`, `statut`, `note`, `age`) VALUES
+(13, NULL, '465465', 46, 'rhrtg', 'srtjhs', 'syqser', 'srtgwdr', 0, NULL, 0),
+(14, NULL, '6587rh', 47, 'russie', 'dyjsrts', 'xdfryer', 'dghdxfgsf', 1, NULL, 0),
+(15, NULL, 'rsehr', 48, 'oui', '', 'eryhrdst', 'sergsqerf', 1, NULL, 0),
+(16, NULL, '89+698', 49, 'oui', '', 'rtyud', 'tyhkftyj', 0, NULL, 0),
+(17, NULL, '06424242', 50, 'goulag', 'gex', 'testbojeu', 'stpmarche', 0, NULL, 25),
+(18, NULL, '78953498', 51, 'America', 'amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes ', 'John', 'Cena', 0, NULL, 256);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `nounous_inscrites`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `nounous_inscrites`;
+CREATE TABLE IF NOT EXISTS `nounous_inscrites` (
+`nombre` bigint(21)
+);
 
 -- --------------------------------------------------------
 
@@ -156,11 +195,21 @@ DROP TABLE IF EXISTS `parent`;
 CREATE TABLE IF NOT EXISTS `parent` (
   `idParent` int(11) NOT NULL AUTO_INCREMENT,
   `telephone` int(45) NOT NULL,
-  `Nom` varchar(45) NOT NULL,
+  `nom` varchar(45) NOT NULL,
   `idU` int(11) NOT NULL,
+  `mdp` varchar(45) NOT NULL,
   PRIMARY KEY (`idParent`),
   KEY `idU` (`idU`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `parent`
+--
+
+INSERT INTO `parent` (`idParent`, `telephone`, `nom`, `idU`, `mdp`) VALUES
+(1, 68746535, 'bonjour', 52, ''),
+(2, 9785213, 'cc', 53, '123456'),
+(3, 6541321, 'marchestp', 54, '123456');
 
 -- --------------------------------------------------------
 
@@ -174,6 +223,28 @@ CREATE TABLE IF NOT EXISTS `pratiquelangue` (
   `langue` varchar(45) NOT NULL,
   PRIMARY KEY (`idN`,`langue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `pratiquelangue`
+--
+
+INSERT INTO `pratiquelangue` (`idN`, `langue`) VALUES
+(14, 'allemand'),
+(14, 'chinois'),
+(14, 'francais'),
+(15, 'allemand'),
+(15, 'arabe'),
+(15, 'espagnol'),
+(15, 'francais'),
+(16, 'chinois'),
+(16, 'francais'),
+(16, 'russe'),
+(17, 'arabe'),
+(17, 'espagnol'),
+(17, 'francais'),
+(17, 'ruski'),
+(18, 'anglais'),
+(18, 'ouais');
 
 -- --------------------------------------------------------
 
@@ -201,23 +272,47 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `MDP` varchar(45) NOT NULL,
+  `mdp` varchar(45) NOT NULL,
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(45) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`MDP`, `ID`, `email`, `type`) VALUES
-('eqrzgqwerh', 7, 'ergzeart@ccccccc.fr', 1),
-('qstegew', 8, 'jdxrgqzfZETG@QEHTKLNQZFQTH.TYJSE', 1),
-('QGQERFGSTJQ', 9, 'GSRHZERGFRGH@GTKQ.ERRG', 1),
-('qfrgqwz', 10, 'setyqjbgkiqer@qzerq.fr', 1);
+INSERT INTO `utilisateur` (`mdp`, `ID`, `email`, `type`) VALUES
+('admin', 1, 'admin@a.a', 2),
+('drhrs', 46, 'testlangue@etshqa.qsdr', 1),
+('redrgz', 47, 'testlangue2@drtsert.vr', 1),
+('rgkrlht,o', 48, 'testlangue3@rthsz.szrt', 1),
+('98+98+65', 49, 'testlangue54635432@rtjsthe.er', 1),
+('oui', 50, 'dsq@fz.cz', 1),
+('ehqrehr', 51, 'john@cena.wwe', 1),
+('354+3', 52, 'eneffet@oui.fr', 1),
+('123456', 53, 'stp@oui.fr', 1),
+('123456', 54, 'stp@stp.fr', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `nb_candidatures`
+--
+DROP TABLE IF EXISTS `nb_candidatures`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `nb_candidatures`  AS  select `a`.`nombre` AS `nombre` from (select count(distinct `n`.`idNounou`) AS `nombre` from `nounou` `n` where (`n`.`statut` = 0)) `a` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `nounous_inscrites`
+--
+DROP TABLE IF EXISTS `nounous_inscrites`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `nounous_inscrites`  AS  select `a`.`nombre` AS `nombre` from (select count(distinct `n`.`idNounou`) AS `nombre` from `nounou` `n` where (`n`.`statut` = 1)) `a` ;
 
 --
 -- Contraintes pour les tables déchargées
