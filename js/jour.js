@@ -61,7 +61,7 @@ const textregu = `
   <br><br>
   <label>
     <input name="type" class="with-gap" type="radio" value="diff" onchange="flex()"/>
-    <span>Horaires par journée</span>
+    <span>Horaire par jour</span>
   </label>
   <br><br><hr><br>`;
 
@@ -84,11 +84,11 @@ const envoyer = `<button class="btn-large  waves-orange" type="submit">Envoyer
 
 const heures = `<div class="input-field col s6">
   <label>Heure de début</label>
-  <input type="text" class="timepicker" name="debut[]">
+  <input type="text" class="timepicker" name="debut[]"/>
 </div>
 <div class="input-field col s6">
   <label>Heure de fin</label>
-  <input type="text" class="timepicker" name="fin[]">
+  <input type="text" class="timepicker" name="fin[]"/>
 </div>` + envoyer;
 
 function displayJours(jours) {
@@ -102,11 +102,11 @@ function displayJours(jours) {
     </div>
     <div class="input-field col s5">
       <label>Heure de début</label>
-      <input type="text" class="timepicker" name="debut[]">
+      <input type="text" class="timepicker" name="debut[]"/>
     </div>
     <div class="input-field col s5">
       <label>Heure de fin</label>
-      <input type="text" class="timepicker" name="fin[]">
+      <input type="text" class="timepicker" name="fin[]"/>
     </div>
   </div>`;
   })
@@ -131,10 +131,12 @@ function add() {
 function regu() {
   if (step1) {
     step1.remove();
-    step3.remove();
   }
   if (step2) {
     step2.remove();
+  }
+  if (step3){
+    step3.remove();
   }
   var htmlObject = document.createElement('div');
   htmlObject.innerHTML = textregu;
@@ -169,7 +171,7 @@ function custom() {
   M.AutoInit();
 }
 function test(e) {
-  console.log();;
+  console.log();
 }
 
 function fixe() {
@@ -197,8 +199,8 @@ function flex() {
   const listeJours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
   if (document.getElementById('semaine').checked) {
     jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi'];
-  } else if (document.getElementById('weekend').checked) {
-    jours = ['Samedi','Dimanche']
+  } else if (document.getElementById('tous').checked) {
+    jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi', 'Samedi','Dimanche'];
   } else {
     let selectHtml = document.getElementById('custom');
     let valJours = Array.from(selectHtml.querySelectorAll("option:checked"),e=>e.value);
