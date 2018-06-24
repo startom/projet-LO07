@@ -33,7 +33,18 @@
                 echo $_POST['idNounou'];
             }
             else if ($_POST['etat'] == -1){
+                $sql='SELECT n.idU FROM nounou n WHERE idNounou=\''.$_POST['idNounou'].'\'';
+                if (!$result = $mysqli->query($sql))
+                {
+                    echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                    exit;
+                }
+                $get_info_idU = $result->fetch_row();
+                $sql='DELETE FROM pratiquelangue WHERE idN=\''.$_POST['idNounou'].'\'';
+                $mysqli->query($sql);
                 $sql='DELETE FROM nounou WHERE idNounou=\''.$_POST['idNounou'].'\'';
+                $mysqli->query($sql);
+                $sql='DELETE FROM utilisateur WHERE ID=\''.$get_info_idU[0].'\'';
                 $mysqli->query($sql);
                 echo 'Nounou refusée <br/>';
             }
@@ -103,7 +114,7 @@
                 else if ($get_info_type[0] == 1)
                 {
                     ?>
-                    
+                    <a href="form_dispo.php">Renseignez vos disponibilités</a>
         
                     <?php
                 }

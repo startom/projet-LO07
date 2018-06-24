@@ -1,19 +1,15 @@
-<nav class="blue">
-  <div class="nav-wrapper">
-    <a href="home.php" class="brand-logo center">WeNounou</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <?php if(!isset($_SESSION['email'])) { ?>
-        <li><a href="inscription.php">Inscription</a></li>
-        <li><a href="connexion.php">Connexion</a></li>
-      <?php } else { ?>
-        <li><a href="compte.php">Mon Compte</a></li>
-        <li><a href="deconnexion.php">Déconnexion</a></li>
-    <?php } ?>
-    </ul>
-
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a href="nounous.php">Nounous</a></li>
-      <li><a href="services.php">Services</a></li>
-  </div>
-
+<nav>   
+    <a class="banniere"><img class="logo" src="./logo.png"></a>
+    <a class="bouton" href="home.php">Accueil</a>
+	<a class="bouton" href="nounous.php">Nounous</a>
+	<a class="bouton" href="services.php">Services</a>
+	<div class="marge"></div>
+	<?php if(!isset($_SESSION['email'])) { ?>
+		<a class="bouton" href="inscription.php">Inscription</a>
+                <a class="bouton" href="connexion.php">Connexion</a>
+	<?php } else { ?>
+		<a class="bouton" href="compte.php">Mon Compte</a>
+                <a class="bouton" href="deconnexion.php">Deconnexion</a>
+	<?php } ?>
+                
 </nav>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 18 juin 2018 à 10:08
+-- Généré le :  Dim 24 juin 2018 à 18:25
 -- Version du serveur :  5.7.19
--- Version de PHP :  5.6.31
+-- Version de PHP :  7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -63,18 +63,31 @@ CREATE TABLE IF NOT EXISTS `avis` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `disponibilité`
+-- Structure de la table `disponibilite`
 --
 
-DROP TABLE IF EXISTS `disponibilité`;
-CREATE TABLE IF NOT EXISTS `disponibilité` (
+DROP TABLE IF EXISTS `disponibilite`;
+CREATE TABLE IF NOT EXISTS `disponibilite` (
   `idNounou` int(11) NOT NULL,
   `idDispo` int(11) NOT NULL AUTO_INCREMENT,
   `d_deb` date NOT NULL,
   `d_fin` date NOT NULL,
   PRIMARY KEY (`idDispo`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `disponibilite`
+--
+
+INSERT INTO `disponibilite` (`idNounou`, `idDispo`, `d_deb`, `d_fin`) VALUES
+(18, 1, '2018-06-30', '2018-06-30'),
+(18, 2, '2018-06-30', '2018-06-30'),
+(18, 3, '2018-06-30', '2018-06-30'),
+(18, 4, '2018-06-30', '2018-06-30'),
+(18, 5, '2018-06-22', '2018-06-22'),
+(18, 6, '2018-06-22', '2018-06-22'),
+(18, 7, '2018-06-29', '2018-06-29');
 
 -- --------------------------------------------------------
 
@@ -104,12 +117,43 @@ DROP TABLE IF EXISTS `jour_d`;
 CREATE TABLE IF NOT EXISTS `jour_d` (
   `idDispo` int(11) NOT NULL,
   `idJour` int(11) NOT NULL AUTO_INCREMENT,
-  `jours` varchar(45) NOT NULL,
+  `jour` varchar(45) NOT NULL,
   `h_deb` int(11) NOT NULL,
   `h_fin` int(11) NOT NULL,
   PRIMARY KEY (`idJour`),
   KEY `idDispo` (`idDispo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `jour_d`
+--
+
+INSERT INTO `jour_d` (`idDispo`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
+(4, 1, '1', 6, 8),
+(4, 2, '1', 9, 24),
+(4, 3, '2', 1, 24),
+(4, 4, '3', 1, 14),
+(4, 5, '6', 11, 24),
+(4, 6, '7', 1, 14),
+(5, 7, '1', 11, 24),
+(5, 8, '2', 1, 8),
+(5, 9, '3', 17, 24),
+(5, 10, '4', 1, 17),
+(5, 11, '5', 21, 24),
+(5, 12, '6', 1, 8),
+(6, 13, '1', 10, 24),
+(6, 14, '2', 0, 7),
+(6, 15, '3', 16, 24),
+(6, 16, '4', 0, 16),
+(6, 17, '5', 20, 24),
+(6, 18, '6', 0, 7),
+(7, 19, '1', 1, 3),
+(7, 20, '1', 4, 6),
+(7, 21, '1', 7, 9),
+(7, 22, '1', 10, 12),
+(7, 23, '1', 13, 15),
+(7, 24, '3', 5, 24),
+(7, 25, '4', 0, 11);
 
 -- --------------------------------------------------------
 
@@ -160,19 +204,18 @@ CREATE TABLE IF NOT EXISTS `nounou` (
   `age` int(3) NOT NULL,
   PRIMARY KEY (`idNounou`),
   KEY `idU_idx` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `nounou`
 --
 
 INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experience`, `nom`, `prenom`, `statut`, `note`, `age`) VALUES
-(13, NULL, '465465', 46, 'rhrtg', 'srtjhs', 'syqser', 'srtgwdr', 0, NULL, 0),
 (14, NULL, '6587rh', 47, 'russie', 'dyjsrts', 'xdfryer', 'dghdxfgsf', 1, NULL, 0),
 (15, NULL, 'rsehr', 48, 'oui', '', 'eryhrdst', 'sergsqerf', 1, NULL, 0),
-(16, NULL, '89+698', 49, 'oui', '', 'rtyud', 'tyhkftyj', 0, NULL, 0),
-(17, NULL, '06424242', 50, 'goulag', 'gex', 'testbojeu', 'stpmarche', 0, NULL, 25),
-(18, NULL, '78953498', 51, 'America', 'amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes ', 'John', 'Cena', 0, NULL, 256);
+(17, NULL, '06424242', 50, 'goulag', 'gex', 'testbojeu', 'stpmarche', 1, NULL, 25),
+(18, NULL, '78953498', 51, 'America', 'amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes ', 'John', 'Cena', 1, 5, 256),
+(19, NULL, '800800800', 55, 'Le Plus Grand Cabaret', 'rtgs', 'Sebastien', 'Patrick', 0, NULL, 800);
 
 -- --------------------------------------------------------
 
@@ -236,15 +279,15 @@ INSERT INTO `pratiquelangue` (`idN`, `langue`) VALUES
 (15, 'arabe'),
 (15, 'espagnol'),
 (15, 'francais'),
-(16, 'chinois'),
-(16, 'francais'),
-(16, 'russe'),
 (17, 'arabe'),
 (17, 'espagnol'),
 (17, 'francais'),
 (17, 'ruski'),
 (18, 'anglais'),
-(18, 'ouais');
+(18, 'ouais'),
+(19, 'allemand'),
+(19, 'francais'),
+(19, 'zerh');
 
 -- --------------------------------------------------------
 
@@ -278,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `type` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -289,12 +332,12 @@ INSERT INTO `utilisateur` (`mdp`, `ID`, `email`, `type`) VALUES
 ('drhrs', 46, 'testlangue@etshqa.qsdr', 1),
 ('redrgz', 47, 'testlangue2@drtsert.vr', 1),
 ('rgkrlht,o', 48, 'testlangue3@rthsz.szrt', 1),
-('98+98+65', 49, 'testlangue54635432@rtjsthe.er', 1),
 ('oui', 50, 'dsq@fz.cz', 1),
 ('ehqrehr', 51, 'john@cena.wwe', 1),
 ('354+3', 52, 'eneffet@oui.fr', 1),
 ('123456', 53, 'stp@oui.fr', 1),
-('123456', 54, 'stp@stp.fr', 0);
+('123456', 54, 'stp@stp.fr', 0),
+('patrick', 55, 'patrick@sebastien.fr', 1);
 
 -- --------------------------------------------------------
 
@@ -332,10 +375,10 @@ ALTER TABLE `avis`
   ADD CONSTRAINT `avis_ibfk_2` FOREIGN KEY (`idNounou`) REFERENCES `nounou` (`idNounou`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `disponibilité`
+-- Contraintes pour la table `disponibilite`
 --
-ALTER TABLE `disponibilité`
-  ADD CONSTRAINT `disponibilité_ibfk_1` FOREIGN KEY (`idNounou`) REFERENCES `nounou` (`idNounou`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `disponibilite`
+  ADD CONSTRAINT `disponibilite_ibfk_1` FOREIGN KEY (`idNounou`) REFERENCES `nounou` (`idNounou`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `enfants`
@@ -347,7 +390,7 @@ ALTER TABLE `enfants`
 -- Contraintes pour la table `jour_d`
 --
 ALTER TABLE `jour_d`
-  ADD CONSTRAINT `jour_d_ibfk_1` FOREIGN KEY (`idDispo`) REFERENCES `disponibilité` (`idDispo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `jour_d_ibfk_1` FOREIGN KEY (`idDispo`) REFERENCES `disponibilite` (`idDispo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `jour_r`
