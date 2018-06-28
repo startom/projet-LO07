@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 24 juin 2018 à 18:25
+-- Généré le :  jeu. 28 juin 2018 à 14:30
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -70,24 +70,18 @@ DROP TABLE IF EXISTS `disponibilite`;
 CREATE TABLE IF NOT EXISTS `disponibilite` (
   `idNounou` int(11) NOT NULL,
   `idDispo` int(11) NOT NULL AUTO_INCREMENT,
-  `d_deb` date NOT NULL,
-  `d_fin` date NOT NULL,
+  `d_deb` varchar(10) NOT NULL,
+  `d_fin` varchar(10) NOT NULL,
   PRIMARY KEY (`idDispo`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `disponibilite`
 --
 
 INSERT INTO `disponibilite` (`idNounou`, `idDispo`, `d_deb`, `d_fin`) VALUES
-(18, 1, '2018-06-30', '2018-06-30'),
-(18, 2, '2018-06-30', '2018-06-30'),
-(18, 3, '2018-06-30', '2018-06-30'),
-(18, 4, '2018-06-30', '2018-06-30'),
-(18, 5, '2018-06-22', '2018-06-22'),
-(18, 6, '2018-06-22', '2018-06-22'),
-(18, 7, '2018-06-29', '2018-06-29');
+(17, 14, '2018-W27', '2018-W27');
 
 -- --------------------------------------------------------
 
@@ -122,38 +116,16 @@ CREATE TABLE IF NOT EXISTS `jour_d` (
   `h_fin` int(11) NOT NULL,
   PRIMARY KEY (`idJour`),
   KEY `idDispo` (`idDispo`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `jour_d`
 --
 
 INSERT INTO `jour_d` (`idDispo`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
-(4, 1, '1', 6, 8),
-(4, 2, '1', 9, 24),
-(4, 3, '2', 1, 24),
-(4, 4, '3', 1, 14),
-(4, 5, '6', 11, 24),
-(4, 6, '7', 1, 14),
-(5, 7, '1', 11, 24),
-(5, 8, '2', 1, 8),
-(5, 9, '3', 17, 24),
-(5, 10, '4', 1, 17),
-(5, 11, '5', 21, 24),
-(5, 12, '6', 1, 8),
-(6, 13, '1', 10, 24),
-(6, 14, '2', 0, 7),
-(6, 15, '3', 16, 24),
-(6, 16, '4', 0, 16),
-(6, 17, '5', 20, 24),
-(6, 18, '6', 0, 7),
-(7, 19, '1', 1, 3),
-(7, 20, '1', 4, 6),
-(7, 21, '1', 7, 9),
-(7, 22, '1', 10, 12),
-(7, 23, '1', 13, 15),
-(7, 24, '3', 5, 24),
-(7, 25, '4', 0, 11);
+(14, 64, '3', 1, 6),
+(14, 65, '3', 8, 13),
+(14, 66, '3', 15, 20);
 
 -- --------------------------------------------------------
 
@@ -163,14 +135,23 @@ INSERT INTO `jour_d` (`idDispo`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
 
 DROP TABLE IF EXISTS `jour_r`;
 CREATE TABLE IF NOT EXISTS `jour_r` (
-  `idReserv` int(11) NOT NULL,
+  `idResa` int(11) NOT NULL,
   `idJour` int(11) NOT NULL AUTO_INCREMENT,
+  `jour` varchar(45) NOT NULL,
   `h_deb` int(11) NOT NULL,
   `h_fin` int(11) NOT NULL,
-  `jours` varchar(45) NOT NULL,
   PRIMARY KEY (`idJour`),
-  KEY `idReserv` (`idReserv`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `idReserv` (`idResa`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `jour_r`
+--
+
+INSERT INTO `jour_r` (`idResa`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
+(1, 1, '3', 2, 3),
+(1, 3, '3', 8, 10),
+(1, 5, '3', 17, 20);
 
 -- --------------------------------------------------------
 
@@ -213,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `nounou` (
 INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experience`, `nom`, `prenom`, `statut`, `note`, `age`) VALUES
 (14, NULL, '6587rh', 47, 'russie', 'dyjsrts', 'xdfryer', 'dghdxfgsf', 1, NULL, 0),
 (15, NULL, 'rsehr', 48, 'oui', '', 'eryhrdst', 'sergsqerf', 1, NULL, 0),
-(17, NULL, '06424242', 50, 'goulag', 'gex', 'testbojeu', 'stpmarche', 1, NULL, 25),
+(17, NULL, '06424242', 50, 'oui', 'gex', 'testbojeu', 'stpmarche', 1, NULL, 25),
 (18, NULL, '78953498', 51, 'America', 'amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes ', 'John', 'Cena', 1, 5, 256),
 (19, NULL, '800800800', 55, 'Le Plus Grand Cabaret', 'rtgs', 'Sebastien', 'Patrick', 0, NULL, 800);
 
@@ -300,12 +281,20 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `idParent` int(11) NOT NULL,
   `idNounou` int(11) NOT NULL,
   `idReservation` int(11) NOT NULL AUTO_INCREMENT,
-  `d_deb` date NOT NULL,
-  `d_fin` date NOT NULL,
+  `d_deb` varchar(10) NOT NULL,
+  `d_fin` varchar(10) NOT NULL,
   PRIMARY KEY (`idReservation`),
   KEY `idParent` (`idParent`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`idParent`, `idNounou`, `idReservation`, `d_deb`, `d_fin`) VALUES
+(2, 17, 1, '2018-W27', '2018-W27'),
+(2, 17, 2, '2018-W27', '2018-W27');
 
 -- --------------------------------------------------------
 
@@ -396,7 +385,7 @@ ALTER TABLE `jour_d`
 -- Contraintes pour la table `jour_r`
 --
 ALTER TABLE `jour_r`
-  ADD CONSTRAINT `jour_r_ibfk_1` FOREIGN KEY (`idReserv`) REFERENCES `reservation` (`idReservation`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `jour_r_ibfk_1` FOREIGN KEY (`idResa`) REFERENCES `reservation` (`idReservation`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `nounou`

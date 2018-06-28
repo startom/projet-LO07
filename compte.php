@@ -12,8 +12,6 @@
         </header>
 
         <?php include("nav.php"); ?>
-        
-        
 
         <?php
         
@@ -113,10 +111,15 @@
                 }
                 else if ($get_info_type[0] == 1)
                 {
+                    //ajouter un if statut nounou = 1, sinon afficher "statut non validé" ou un truc comme ça
                     ?>
+                    <h2>Nounou</h2>
                     <a href="form_dispo.php">Renseignez vos disponibilités</a>
         
                     <?php
+                    echo date("l", strtotime("2018-10-05"));
+                    $days=["Monday","Tuesday"];
+                    echo array_search("Tuesday",$days);
                 }
                 else if ($get_info_type[0] == 2)
                 {

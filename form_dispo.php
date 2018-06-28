@@ -3,7 +3,7 @@
 <html onmouseup='released();'>
 	<head>
 		<meta charset="utf-8" />
-		<script type="text/javascript" src="form2.js"> </script>
+		<script type="text/javascript" src="form_dispo.js"> </script>
         <link rel="stylesheet" href="form.css" />
 		<title>test formulaire</title>
 	</head>
@@ -13,7 +13,7 @@
 			<label for="recur">Récurrence ?</label> <input type="checkbox" name="recur" id="recur" onclick="formu_date();" /> 
 
 			<div id="date">
-				<label for="date1">Date : </label><input type="date" name="date1" id="date1" />
+				<label for="date1">Date : </label><input type="week" name="date1" id="date1" />
 			</div>
 
 			<div class="horizontal">
