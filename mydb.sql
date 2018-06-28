@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 28 juin 2018 à 14:30
+-- Généré le :  jeu. 31 mai 2018 à 18:03
 -- Version du serveur :  5.7.19
--- Version de PHP :  7.1.9
+-- Version de PHP :  5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,18 +31,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `administrateur`;
 CREATE TABLE IF NOT EXISTS `administrateur` (
   `idU` int(11) NOT NULL,
-  `idAdmin` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`idAdmin`),
   KEY `idU` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `administrateur`
---
-
-INSERT INTO `administrateur` (`idU`, `idAdmin`) VALUES
-(1, 1),
-(1, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -63,25 +53,18 @@ CREATE TABLE IF NOT EXISTS `avis` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `disponibilite`
+-- Structure de la table `disponibilité`
 --
 
-DROP TABLE IF EXISTS `disponibilite`;
-CREATE TABLE IF NOT EXISTS `disponibilite` (
+DROP TABLE IF EXISTS `disponibilité`;
+CREATE TABLE IF NOT EXISTS `disponibilité` (
   `idNounou` int(11) NOT NULL,
   `idDispo` int(11) NOT NULL AUTO_INCREMENT,
-  `d_deb` varchar(10) NOT NULL,
-  `d_fin` varchar(10) NOT NULL,
+  `d_deb` date NOT NULL,
+  `d_fin` date NOT NULL,
   PRIMARY KEY (`idDispo`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `disponibilite`
---
-
-INSERT INTO `disponibilite` (`idNounou`, `idDispo`, `d_deb`, `d_fin`) VALUES
-(17, 14, '2018-W27', '2018-W27');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,21 +94,12 @@ DROP TABLE IF EXISTS `jour_d`;
 CREATE TABLE IF NOT EXISTS `jour_d` (
   `idDispo` int(11) NOT NULL,
   `idJour` int(11) NOT NULL AUTO_INCREMENT,
-  `jour` varchar(45) NOT NULL,
+  `jours` varchar(45) NOT NULL,
   `h_deb` int(11) NOT NULL,
   `h_fin` int(11) NOT NULL,
   PRIMARY KEY (`idJour`),
   KEY `idDispo` (`idDispo`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `jour_d`
---
-
-INSERT INTO `jour_d` (`idDispo`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
-(14, 64, '3', 1, 6),
-(14, 65, '3', 8, 13),
-(14, 66, '3', 15, 20);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -135,34 +109,14 @@ INSERT INTO `jour_d` (`idDispo`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
 
 DROP TABLE IF EXISTS `jour_r`;
 CREATE TABLE IF NOT EXISTS `jour_r` (
-  `idResa` int(11) NOT NULL,
+  `idReserv` int(11) NOT NULL,
   `idJour` int(11) NOT NULL AUTO_INCREMENT,
-  `jour` varchar(45) NOT NULL,
   `h_deb` int(11) NOT NULL,
   `h_fin` int(11) NOT NULL,
+  `jours` varchar(45) NOT NULL,
   PRIMARY KEY (`idJour`),
-  KEY `idReserv` (`idResa`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `jour_r`
---
-
-INSERT INTO `jour_r` (`idResa`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
-(1, 1, '3', 2, 3),
-(1, 3, '3', 8, 10),
-(1, 5, '3', 17, 20);
-
--- --------------------------------------------------------
-
---
--- Doublure de structure pour la vue `nb_candidatures`
--- (Voir ci-dessous la vue réelle)
---
-DROP VIEW IF EXISTS `nb_candidatures`;
-CREATE TABLE IF NOT EXISTS `nb_candidatures` (
-`nombre` bigint(21)
-);
+  KEY `idReserv` (`idReserv`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -181,33 +135,16 @@ CREATE TABLE IF NOT EXISTS `nounou` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `statut` int(11) NOT NULL DEFAULT '0',
-  `note` int(11) DEFAULT NULL,
-  `age` int(3) NOT NULL,
   PRIMARY KEY (`idNounou`),
   KEY `idU_idx` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `nounou`
 --
 
-INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experience`, `nom`, `prenom`, `statut`, `note`, `age`) VALUES
-(14, NULL, '6587rh', 47, 'russie', 'dyjsrts', 'xdfryer', 'dghdxfgsf', 1, NULL, 0),
-(15, NULL, 'rsehr', 48, 'oui', '', 'eryhrdst', 'sergsqerf', 1, NULL, 0),
-(17, NULL, '06424242', 50, 'oui', 'gex', 'testbojeu', 'stpmarche', 1, NULL, 25),
-(18, NULL, '78953498', 51, 'America', 'amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes ', 'John', 'Cena', 1, 5, 256),
-(19, NULL, '800800800', 55, 'Le Plus Grand Cabaret', 'rtgs', 'Sebastien', 'Patrick', 0, NULL, 800);
-
--- --------------------------------------------------------
-
---
--- Doublure de structure pour la vue `nounous_inscrites`
--- (Voir ci-dessous la vue réelle)
---
-DROP VIEW IF EXISTS `nounous_inscrites`;
-CREATE TABLE IF NOT EXISTS `nounous_inscrites` (
-`nombre` bigint(21)
-);
+INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experience`, `nom`, `prenom`, `statut`) VALUES
+(2, NULL, 'qsreqer', 10, 'sjqw', 'sfthswrth', 'urkters', 'tqezrtgdrtght qzev tdebryugsdbr ydnt(jsr', 0);
 
 -- --------------------------------------------------------
 
@@ -219,21 +156,11 @@ DROP TABLE IF EXISTS `parent`;
 CREATE TABLE IF NOT EXISTS `parent` (
   `idParent` int(11) NOT NULL AUTO_INCREMENT,
   `telephone` int(45) NOT NULL,
-  `nom` varchar(45) NOT NULL,
+  `Nom` varchar(45) NOT NULL,
   `idU` int(11) NOT NULL,
-  `mdp` varchar(45) NOT NULL,
   PRIMARY KEY (`idParent`),
   KEY `idU` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `parent`
---
-
-INSERT INTO `parent` (`idParent`, `telephone`, `nom`, `idU`, `mdp`) VALUES
-(1, 68746535, 'bonjour', 52, ''),
-(2, 9785213, 'cc', 53, '123456'),
-(3, 6541321, 'marchestp', 54, '123456');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -248,28 +175,6 @@ CREATE TABLE IF NOT EXISTS `pratiquelangue` (
   PRIMARY KEY (`idN`,`langue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `pratiquelangue`
---
-
-INSERT INTO `pratiquelangue` (`idN`, `langue`) VALUES
-(14, 'allemand'),
-(14, 'chinois'),
-(14, 'francais'),
-(15, 'allemand'),
-(15, 'arabe'),
-(15, 'espagnol'),
-(15, 'francais'),
-(17, 'arabe'),
-(17, 'espagnol'),
-(17, 'francais'),
-(17, 'ruski'),
-(18, 'anglais'),
-(18, 'ouais'),
-(19, 'allemand'),
-(19, 'francais'),
-(19, 'zerh');
-
 -- --------------------------------------------------------
 
 --
@@ -281,20 +186,12 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `idParent` int(11) NOT NULL,
   `idNounou` int(11) NOT NULL,
   `idReservation` int(11) NOT NULL AUTO_INCREMENT,
-  `d_deb` varchar(10) NOT NULL,
-  `d_fin` varchar(10) NOT NULL,
+  `d_deb` date NOT NULL,
+  `d_fin` date NOT NULL,
   PRIMARY KEY (`idReservation`),
   KEY `idParent` (`idParent`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `reservation`
---
-
-INSERT INTO `reservation` (`idParent`, `idNounou`, `idReservation`, `d_deb`, `d_fin`) VALUES
-(2, 17, 1, '2018-W27', '2018-W27'),
-(2, 17, 2, '2018-W27', '2018-W27');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -304,47 +201,23 @@ INSERT INTO `reservation` (`idParent`, `idNounou`, `idReservation`, `d_deb`, `d_
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `mdp` varchar(45) NOT NULL,
+  `MDP` varchar(45) NOT NULL,
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(45) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`mdp`, `ID`, `email`, `type`) VALUES
-('admin', 1, 'admin@a.a', 2),
-('drhrs', 46, 'testlangue@etshqa.qsdr', 1),
-('redrgz', 47, 'testlangue2@drtsert.vr', 1),
-('rgkrlht,o', 48, 'testlangue3@rthsz.szrt', 1),
-('oui', 50, 'dsq@fz.cz', 1),
-('ehqrehr', 51, 'john@cena.wwe', 1),
-('354+3', 52, 'eneffet@oui.fr', 1),
-('123456', 53, 'stp@oui.fr', 1),
-('123456', 54, 'stp@stp.fr', 0),
-('patrick', 55, 'patrick@sebastien.fr', 1);
-
--- --------------------------------------------------------
-
---
--- Structure de la vue `nb_candidatures`
---
-DROP TABLE IF EXISTS `nb_candidatures`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `nb_candidatures`  AS  select `a`.`nombre` AS `nombre` from (select count(distinct `n`.`idNounou`) AS `nombre` from `nounou` `n` where (`n`.`statut` = 0)) `a` ;
-
--- --------------------------------------------------------
-
---
--- Structure de la vue `nounous_inscrites`
---
-DROP TABLE IF EXISTS `nounous_inscrites`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `nounous_inscrites`  AS  select `a`.`nombre` AS `nombre` from (select count(distinct `n`.`idNounou`) AS `nombre` from `nounou` `n` where (`n`.`statut` = 1)) `a` ;
+INSERT INTO `utilisateur` (`MDP`, `ID`, `email`, `type`) VALUES
+('eqrzgqwerh', 7, 'ergzeart@ccccccc.fr', 1),
+('qstegew', 8, 'jdxrgqzfZETG@QEHTKLNQZFQTH.TYJSE', 1),
+('QGQERFGSTJQ', 9, 'GSRHZERGFRGH@GTKQ.ERRG', 1),
+('qfrgqwz', 10, 'setyqjbgkiqer@qzerq.fr', 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -364,10 +237,10 @@ ALTER TABLE `avis`
   ADD CONSTRAINT `avis_ibfk_2` FOREIGN KEY (`idNounou`) REFERENCES `nounou` (`idNounou`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `disponibilite`
+-- Contraintes pour la table `disponibilité`
 --
-ALTER TABLE `disponibilite`
-  ADD CONSTRAINT `disponibilite_ibfk_1` FOREIGN KEY (`idNounou`) REFERENCES `nounou` (`idNounou`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `disponibilité`
+  ADD CONSTRAINT `disponibilité_ibfk_1` FOREIGN KEY (`idNounou`) REFERENCES `nounou` (`idNounou`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `enfants`
@@ -379,13 +252,13 @@ ALTER TABLE `enfants`
 -- Contraintes pour la table `jour_d`
 --
 ALTER TABLE `jour_d`
-  ADD CONSTRAINT `jour_d_ibfk_1` FOREIGN KEY (`idDispo`) REFERENCES `disponibilite` (`idDispo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `jour_d_ibfk_1` FOREIGN KEY (`idDispo`) REFERENCES `disponibilité` (`idDispo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `jour_r`
 --
 ALTER TABLE `jour_r`
-  ADD CONSTRAINT `jour_r_ibfk_1` FOREIGN KEY (`idResa`) REFERENCES `reservation` (`idReservation`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `jour_r_ibfk_1` FOREIGN KEY (`idReserv`) REFERENCES `reservation` (`idReservation`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `nounou`

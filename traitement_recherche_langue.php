@@ -32,15 +32,15 @@
                         exit;
                 }
             }
-            
-             $sql='SELECT n.idNounou FROM nounou n WHERE n.ville=\''.$_POST['ville'].'\'';
-                if (!$result = $mysqli->query($sql))
+
+            $sql='SELECT l.idN FROM pratiquelangue l WHERE langue=\''.$_POST['langue'].'\'';
+            if (!$result = $mysqli->query($sql))
                 {
                     echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
                     exit;
                 }
-                //$get_info_idN = $result->fetch_row();
-                $idN="( ";
+
+                 $idN="( ";
                 while($get_info_idN = $result->fetch_row()){
                     if($idN != "( "){
                         $idN.=" OR ";
