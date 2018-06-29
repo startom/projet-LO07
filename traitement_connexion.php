@@ -22,13 +22,12 @@
             }
             
             $sql='SELECT u.ID FROM utilisateur u WHERE u.email=\''.$_POST['email'].'\' and u.mdp=\''.$_POST['mdp'].'\'';
-            $mysqli->query($sql);
-            
             if (!$result = $mysqli->query($sql))
             {
                 echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
                 exit;
             }
+
             
             if(!$get_info = $result->fetch_row())
             {
