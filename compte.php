@@ -86,9 +86,9 @@
                             echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
                             exit;
                         }
-                        $get_info_id_parent = $result->fetch_row();
+                        $get_info_idParent = $result->fetch_row();
                         
-                        $sql='SELECT Count(distinct e.idEnfant) AS nombre FROM enfants e WHERE idParent = \''.$get_info_id_parent[0].'\'';
+                        $sql='SELECT Count(distinct e.idEnfant) AS nombre FROM enfants e WHERE idParent = \''.$get_info_idParent[0].'\'';
                         if (!$result = $mysqli->query($sql))
                         {
                             echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
@@ -105,8 +105,39 @@
                         <form method="post" action="enregistrer_enfant.php">
                             <input class='bout_dispo' type="submit" value="Enregistrer un enfant">
                         </form>
+
                         <?php
-                        
+
+                        $sql='SELECT * FROM reservation r WHERE r.idParent =\''.$get_info_idParent[0].'\'';
+                        if (!$result = $mysqli->query($sql))
+                        {
+                            echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                            exit;
+                        }
+                        $get_info_reservation = $result->fetch_row();
+
+                        while($get_info_reservation[4] = $result->fetch_row()){
+
+                        $annee = intval(substr($get_info_reservation[4],0,4));
+                        $semaine = intval(substr($get_info_reservation[4],6,2));
+                        $semaine = ($semaine + 1) % 53;
+                        if(!$semaine){
+                            $annee++;
+                        }
+                        $get_info_reservation[4] = $annee . "-W" . sprintf("%02d",$semaine);
+
+                            if(strtotime($get_info_reservation[4]) <= time()){
+                                echo "<form method='post' action='valider_prestation.php'><h4>Prestation à valider :</h4>";
+                                echo "<div class=texte> ";
+                                echo "<input type='submit value='Valider la prestation'> </form>";
+
+                                $date_semaine = $get_info_reservation[4];
+                                //$date_semaine .= 
+
+
+                                date("c",strtotime("2018-W05-5"));
+                            }
+                        }
                         
                         ?>
                     </div>

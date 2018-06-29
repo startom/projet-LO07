@@ -26,7 +26,11 @@ function hovered(i,j)
 					if(x == pressedx && y>= Math.min(j,pressedy) && y<= Math.max(j,pressedy))
 					{
 						if(phase == 1)
+						{
+							for(z = 0; z < tableau.length; z++) 
+								tableau[z][y] = -1;
 							tableau[x][y] = 2;
+						}
 						else if(phase == -1)
 						{
 							tableau[x][y] = -2;

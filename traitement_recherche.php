@@ -5,6 +5,7 @@
         <title>Recherche</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="form.css">
+        <link rel="stylesheet" type="text/css" href="resa.css">
         <script type="text/javascript" src="resa.js"></script>
     </head>
     <body>
@@ -17,7 +18,7 @@
         <?php
             
             if(isset($_SESSION['email'])){
-                $mysqli = new mysqli('localhost', 'utilisateur', 'utilisateur', 'mydb');
+                $mysqli = new mysqli('localhost', 'root', '', 'mydb');
                 if ($mysqli->connect_errno)
                 {
                         echo 'Erreur de connexion : errno: ' . $mysqli->errno . ' error: ' . $mysqli->error;
@@ -25,7 +26,7 @@
                 }
             }
             else {
-                $mysqli = new mysqli('localhost', 'visiteur', 'visiteur', 'mydb');
+                $mysqli = new mysqli('localhost', 'root', '', 'mydb');
                 if ($mysqli->connect_errno)
                 {
                         echo 'Erreur de connexion : errno: ' . $mysqli->errno . ' error: ' . $mysqli->error;
@@ -259,6 +260,33 @@
                             
                     }
                 }
+
+
+
+
+
+
+
+
+                for ($i=0; $i < count($info); $i++) {
+                    $sql = 'SELECT * FROM nounou n WHERE n.idNounou = \''.$info[$i][0].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                    $info[$i][2] = $result->fetch_row();
+                    //echo $info[$i][2][0].' '.$info[$i][2][1].' '.$info[$i][2][2].' '.$info[$i][2][3].' '.$info[$i][2][4].' '.$info[$i][2][5].' '.$info[$i][2][6].' '.$info[$i][2][7].' '.$info[$i][2][8].' '.$info[$i][2][9].' '.$info[$i][2][10];
+
+                    $sql = 'SELECT langue FROM pratiquelangue p WHERE p.idN = \''.$info[$i][0].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                    $info[$i][3] = $result->fetch_row();
+                }
+
             ?>
 
             <form>
@@ -268,6 +296,53 @@
                     for($i = 0; $i< count($info); $i++)
                     {
                         echo '<div class=\'vertical\'>';
+                        ?>
+
+                        <a href="#<?php echo $i ?>"><img src="nounou.jpg" style="width: 50px; height: 50px;"></a>
+                        <p>
+                            <?php echo $info[$i][2][7].' '.$info[$i][2][6];?>
+                        </p>
+
+
+                        <div id="<?php echo $i ?>" class="modal">
+                            <div class="contenue">
+                                <section class="s1">
+                                    <a href="#" class="closebtn">×</a>
+                                    <h1>
+                                        Informations
+                                    </h1>
+                                </section>
+
+                                <section class="texte">
+                                    <?php
+                                    echo '
+                                        <p>Nom : </p>
+                                        <p>'.$info[$i][2][6].'</p>
+                                        <p>Prenom : </p>
+                                        <p>'.$info[$i][2][7].'</p>
+                                        <p>Age : </p>
+                                        <p>'.$info[$i][2][10].'</p>
+                                        <p>Ville : </p>
+                                        <p>'.$info[$i][2][4].'</p>
+                                        <p>Telephone : </p>
+                                        <p>'.$info[$i][2][2].'</p>
+                                        <p>Experience : </p>
+                                        <p>'.$info[$i][2][5].'</p>
+                                        <p>Langues pratiquées : </p>
+                                        <ul>
+                                    ';
+
+                                    for ($j=0; $j < count($info[$i][3]); $j++) { 
+                                        echo '<li>'.$info[$i][3][$j].'</li>';
+                                    }
+
+                                    ?>
+                                    </ul>  
+                                </section>
+                            </div>
+                        </div>
+
+                        <?php
                         for($j = 0; $j<24; $j++)
                         {
                             $value=sprintf("%02d",$j)."h00 - " . sprintf("%02d",$j+1)."h00";

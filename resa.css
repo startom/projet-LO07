@@ -1,0 +1,113 @@
+@-webkit-keyframes arrive1 {
+    from {opacity: 0;}
+    to {opacity:1;}
+}
+
+@keyframes arrive1 {
+    from {opacity: 0;}
+    to {opacity:1;}
+}
+
+@-webkit-keyframes arrive2 {
+    from {top:-100px;opacity: 0;}
+    to {top:0px;opacity:1;}
+}
+
+@keyframes arrive2 {
+    from {top:-100px;opacity: 0;}
+    to {top:0px;opacity:1;}
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+
+	background-color: rgba(0, 0, 0, 0.5);
+
+	z-index: 256;
+}
+
+.modal:target {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*#connection */.modal:target
+{
+	-webkit-animation-name: arrive1;
+	-webkit-animation-duration: 0.5s;
+	animation-name: arrive1;
+	animation-duration: 0.5s;
+}
+
+.contenue
+{
+	display: flex;
+  	justify-content: center;
+ 	align-items: center;
+ 	flex-direction: column;
+
+ 	width: 80%;
+ 	text-align: center;
+
+ 	-webkit-animation-name: arrive2;
+	-webkit-animation-duration: 0.5s;
+	animation-name: arrive2;
+	animation-duration: 0.5s;
+
+
+	background-color: #FFFFFF;
+}
+
+.contenue>.texte>form
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.contenue>.texte>form>input
+{
+	margin: 10px;
+}
+
+.contenue>.texte
+{
+	padding-top: 100px;
+	padding-bottom: 100px;
+	flex-direction: column;
+	align-items: center;
+}
+
+.closebtn {
+	text-decoration: none;
+	font-size: 35px;
+	font-weight: bold;
+	color: #000;
+}
+
+.closebtn:hover, .closebtn:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.texte
+{
+	width: 100%;
+	
+	padding-top: 200px;
+	padding-bottom: 200px;
+
+	/*background-color: #3F3030;*/
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	justify-content: center;
+}
