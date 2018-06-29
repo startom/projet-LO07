@@ -67,9 +67,13 @@
                     exit;
                 }
                 $get_info_id = $result->fetch_row();
+
+
+
                 
                 
-                
+
+                //compte parent
                 if ($get_info_type[0] == 0)
                 {
                     ?>
@@ -92,14 +96,14 @@
                         }
                         $get_info_nb_enfants = $result->fetch_row();
                         
-                        echo 'Vous avez '.$get_info_nb_enfants[0].' enfants enregistrés<br/><br/>';
+                        echo 'Vous avez '.$get_info_nb_enfants[0].' enfants enregistré(s)<br/><br/>';
                         
                         for ($i = 0; $i < $get_info_nb_enfants[0]; $i++){
                             //afficher les enfants
                         }
                         ?>
                         <form method="post" action="enregistrer_enfant.php">
-                            <input type="submit" value="Enregistrer un enfant">
+                            <input class='bout_dispo' type="submit" value="Enregistrer un enfant">
                         </form>
                         <?php
                         
@@ -109,18 +113,47 @@
         
                     <?php
                 }
+
+
+
+
+
+
+                //compte nounou
                 else if ($get_info_type[0] == 1)
                 {
-                    //ajouter un if statut nounou = 1, sinon afficher "statut non validé" ou un truc comme ça
-                    ?>
-                    <h2>Nounou</h2>
-                    <a href="form_dispo.php">Renseignez vos disponibilités</a>
-        
-                    <?php
-                    echo date("l", strtotime("2018-10-05"));
-                    $days=["Monday","Tuesday"];
-                    echo array_search("Tuesday",$days);
+                    $sql='SELECT n.statut FROM nounou n WHERE n.idU=\''.$get_info_id[0].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                    $get_info_statut = $result->fetch_row();
+
+                    $sql='SELECT n.idNounou FROM nounou n WHERE n.idU=\''.$get_info_id[0].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                    $get_info_idNounou = $result->fetch_row();
+
+                    if($get_info_statut[0] == 1){
+                        echo "<h2>Nounou</h2> <div class='texte_background'> <form action = 'form_dispo.php'><input class='bout_dispo' type='submit' value='Enregistrer vos disponibilités'></form><br/>";
+
+                        echo "<form method='post' action = 'visualiser_dispo.php'> <input type='hidden' value=$get_info_idNounou[0] name='idNounou'> <input class='bout_dispo' type='submit' value='Voir vos disponibilités'> </form> </div>";
+                    }
+                    else {
+                        echo "<h2>Nounou</h2><p>Vous devez attendre que votre candidature soit acceptée pour pouvoir renseigner vos disponibilités.</p>";
+                    }
                 }
+
+
+
+
+
+
+                //compte administrateur
                 else if ($get_info_type[0] == 2)
                 {
                     ?>
@@ -148,7 +181,6 @@
                             echo 'Nombre de nounous inscrites: '.$get_info[0].'<br/>';
                             
                             ?>
-                            
                             
                         </div>
                         <div class="colonne">

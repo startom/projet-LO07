@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Bienvenue sur [nom du site]</title>
+        <title>Bienvenue sur Nutrix</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript" src="js.js"></script>
     </head>
@@ -13,7 +13,7 @@
 
         <?php include("nav.php"); ?>
 
-        <h1>Bienvenue sur [nom du site]!</h1>
+        <h1>Bienvenue sur Nutrix!</h1>
         <div class="home">
             <h3>
                 Rechercher une nounou proche de chez vous :
@@ -39,6 +39,11 @@
             </div>
 
         </div>
+
+        <form method='post' action='profil_nounou.php'>
+            <input type='hidden' value='19' name='idNounou'>
+            <input type="submit" value="Profil nounou">
+        </form>
 
         <footer>
             <?php include("footer.php"); ?>

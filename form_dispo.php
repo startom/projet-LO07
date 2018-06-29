@@ -4,9 +4,16 @@
 	<head>
 		<meta charset="utf-8" />
 		<script type="text/javascript" src="form_dispo.js"> </script>
+		<!-- <link rel="stylesheet" href="style.css" /> -->
         <link rel="stylesheet" href="form.css" />
-		<title>test formulaire</title>
+		<title>Enregistrer des disponibilités</title>
 	</head>
+
+	<header>
+
+        </header>
+
+        <?php include("nav.php"); ?>
 
 	<body>
 		<form method="post" action="traitement_dispo.php">
@@ -67,5 +74,9 @@
 			</div>
 			<input type="submit" name="Confirmer">
 		</form>
+
+		<footer>
+            <?php include("footer.php"); ?>
+        </footer>
 	</body>
 </html>

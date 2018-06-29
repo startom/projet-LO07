@@ -31,7 +31,9 @@
             
             if(!$get_info = $result->fetch_row())
             {
+                echo "<br/>";
                 echo 'Email ou mot de passe incorrect';
+                echo "<br/>";
             }
             else
             {
@@ -45,7 +47,7 @@
         <?php include("nav.php"); ?>
         
         <footer>
-
+            <?php include("footer.php"); ?>
         </footer>
     </body>
 </html>

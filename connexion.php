@@ -26,7 +26,6 @@
                 
                 <p>
                     <input type="submit" value="Envoyer"/>
-                    <input type="reset" value="Effacer"/>
                 </p>
             </div>
         </form>

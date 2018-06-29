@@ -1,11 +1,11 @@
 <?php session_start(); ?>
 
-<html>
+<html onmouseup="released();">
     <head>
         <title>Recherche</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="form.css">
-        <script type="text/javascript" src="form_dispo.js"></script>
+        <script type="text/javascript" src="resa.js"></script>
     </head>
     <body>
         <header>
@@ -273,15 +273,25 @@
                             $value=sprintf("%02d",$j)."h00 - " . sprintf("%02d",$j+1)."h00";
                             if($info[$i][1][$j]){
                                 echo '<input type=\'button\' value=\''.$value.'\' id=\''.$i.'-'.$j.'\' onmousedown=\'pressed('.$i.','.$j.');\' onmouseover=\'hovered('.$i.','.$j.');\'>';
-                                echo '<input type=\'hidden\' name=\''.$i.'-'.$j.'\' id=\'h'.$i.'-'.$j.'\' value=\'0\'>';
+                                echo '<input type=\'hidden\' name=\''.$i.'-'.$j.'\' id=\'h'.$i.'-'.$j.'\' value=\''.$info[$i][0].'\'>';
                             }
                             else {
                                 echo '<input type=\'button\' value=\''.$value.'\' id=\''.$i.'-'.$j.'\' onmousedown=\'pressed('.$i.','.$j.');\' onmouseover=\'hovered('.$i.','.$j.');\' disabled style=\'background-color: rgba(75,75,75,0.6)\'>';
-                                echo '<input type=\'hidden\' name=\''.$i.'-'.$j.'\' id=\'h'.$i.'-'.$j.'\' value=\'0\'>';
+                                echo '<input type=\'hidden\' name=\''.$i.'-'.$j.'\' id=\'h'.$i.'-'.$j.'\' value=\''.$info[$i][0].'\'>';
                             }
                         }
                         echo '</div>';
                     }
+
+                    for($j = 0;$j < 24; $j++){
+                        echo '<input type=\'hidden\' name=\''.$j.'\' id=\''.$j.'\' value=\'0\'>';
+                    }
+
+                    echo '
+                        <script type="text/javascript">
+                            setup('.count($info).',24);
+                        </script>
+                    ';
 
                 ?>
              </div>

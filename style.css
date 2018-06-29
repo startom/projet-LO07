@@ -219,6 +219,11 @@ form > .bout_accepter
         margin: 10px 3px;
 }
 
+form > .bout_dispo
+{
+        width: 220px;
+}
+
 .form_affectation
 {
         display: flex;
@@ -263,6 +268,15 @@ textarea
 .texte
 {
         margin-bottom: 50px;
+}
+
+.texte_background
+{
+        margin-bottom: 50px;
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 10px;
 }
 
 .home
