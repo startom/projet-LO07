@@ -34,7 +34,7 @@
                 </p>
                 
                 <p>
-                <input id="ltelephone" type="text" name="telephone" placeholder="Téléphone" required="true">
+                <input id="ltelephone" type="tel" name="telephone" placeholder="Téléphone" required="true" size="10" min="10">
                 </p>
                 
                 <p>
