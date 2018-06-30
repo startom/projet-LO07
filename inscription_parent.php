@@ -27,7 +27,7 @@
                 
                 <p>
                 <label for="ltelephone">Téléphone </label>
-                <input id="ltelephone" type="number" name="telephone" placeholder="Votre numéro de téléphone" required="true">
+                <input id="ltelephone" type="tel" name="telephone" placeholder="Votre numéro de téléphone" required="true" size="10" min"10">
                 </p>
                 
                 <p>
