@@ -30,7 +30,7 @@
                 </p>
                 
                 <p>
-                <input id="lage" type="number" name="age" placeholder="Age" required="true" max="60">
+                <input id="lage" type="number" name="age" placeholder="Age" required="true" max="60" min="18">
                 </p>
                 
                 <p>
