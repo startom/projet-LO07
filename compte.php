@@ -29,7 +29,6 @@
                 $sql='UPDATE nounou SET statut=1 WHERE idNounou=\''.$_POST['idNounou'].'\'';
                 $mysqli->query($sql);
                 echo 'Nounou acceptée!<br/>';
-                echo $_POST['idNounou'];
             }
             else if ($_POST['etat'] == -1){
                 $sql='SELECT n.idU FROM nounou n WHERE idNounou=\''.$_POST['idNounou'].'\'';
@@ -185,12 +184,13 @@
                                     echo "<input type='hidden' value=".$get_info_nounou_resa[9]." name='moy_notes'>";
                                     echo "<input type='hidden' value=".$get_info_nounou_resa[0]." name='idNounou_note'>";
                                     echo "<input type='hidden' value=".$get_info_reservation[2]." name='idResa'>";
-                                    echo "<input type='submit' value='Valider la prestation'>";
+                                    echo "<input class='bout_dispo' type='submit' value='Valider la prestation'>";
                                     echo "<input type='hidden' value='1' name='note' id='note'> </form>";
                                     echo "</div>";
 
                                     date("c",strtotime("2018-W05-5"));
                             }
+                            echo "<br/>";
                         }
                         
 

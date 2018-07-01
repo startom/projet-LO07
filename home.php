@@ -39,11 +39,6 @@
             </div>
 
         </div>
-
-        <form method='post' action='profil_nounou.php'>
-            <input type='hidden' value='19' name='idNounou'>
-            <input type="submit" value="Profil nounou">
-        </form>
         
 
         <footer>

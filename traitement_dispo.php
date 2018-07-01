@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>zegzerf</title>
+        <title>Enregistrer disponibilité</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript" src="js.js"></script>
     </head>
@@ -56,7 +56,6 @@
                 
             
             $plages = intdiv(1440,$_POST['intervalle']);
-            echo $plages;
             $h_deb = -1;
             
             for($i=1; $i<=7; $i++){
@@ -78,6 +77,8 @@
                     $h_deb=-1;
                 }
             }
+
+            echo "<h3>Vos disponibilités ont bien été enregistrées</h3><br/>";
             
             
             ?>

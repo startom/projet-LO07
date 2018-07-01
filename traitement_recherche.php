@@ -396,7 +396,6 @@
                     for($j = 0;$j < 24; $j++){
                         echo '<input type=\'hidden\' name=\'h'.$j.'\' id=\'h'.$j.'\' value=\'0\'>';
                     }
-                    echo count($info);
                     echo '
                         <script type="text/javascript">
                             setup('.count($info).',24);

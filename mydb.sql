@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 01 juil. 2018 à 17:05
+-- Généré le :  Dim 01 juil. 2018 à 21:10
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `disponibilite` (
   `d_fin` varchar(10) NOT NULL,
   PRIMARY KEY (`idDispo`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `disponibilite`
@@ -89,7 +89,9 @@ INSERT INTO `disponibilite` (`idNounou`, `idDispo`, `d_deb`, `d_fin`) VALUES
 (19, 19, '2018-W27', '2018-W27'),
 (19, 20, '2018-W52', '2018-W52'),
 (19, 21, '2018-W48', '2018-W48'),
-(19, 22, '2018-W02', '2018-W02');
+(19, 22, '2018-W02', '2018-W02'),
+(21, 23, '2018-W23', '2018-W23'),
+(21, 24, '2018-W24', '2018-W24');
 
 -- --------------------------------------------------------
 
@@ -141,11 +143,13 @@ INSERT INTO `enfant_resa` (`idEnfant`, `idResa`) VALUES
 (1, 91),
 (1, 92),
 (1, 93),
+(1, 94),
 (3, 89),
 (3, 90),
 (3, 91),
 (3, 92),
-(3, 93);
+(3, 93),
+(3, 94);
 
 -- --------------------------------------------------------
 
@@ -162,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `jour_d` (
   `h_fin` int(11) NOT NULL,
   PRIMARY KEY (`idJour`),
   KEY `idDispo` (`idDispo`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `jour_d`
@@ -201,7 +205,15 @@ INSERT INTO `jour_d` (`idDispo`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
 (19, 93, '4', 0, 24),
 (20, 94, '2', 0, 24),
 (21, 95, '6', 0, 24),
-(22, 96, '1', 0, 24);
+(22, 96, '1', 0, 24),
+(23, 97, '1', 9, 22),
+(24, 98, '1', 0, 24),
+(24, 99, '2', 0, 24),
+(24, 100, '3', 0, 24),
+(24, 101, '4', 0, 24),
+(24, 102, '5', 0, 24),
+(24, 103, '6', 0, 24),
+(24, 104, '7', 0, 24);
 
 -- --------------------------------------------------------
 
@@ -218,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `jour_r` (
   `h_fin` int(11) NOT NULL,
   PRIMARY KEY (`idJour`),
   KEY `idReserv` (`idResa`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `jour_r`
@@ -229,7 +241,8 @@ INSERT INTO `jour_r` (`idResa`, `idJour`, `jour`, `h_deb`, `h_fin`) VALUES
 (90, 39, '3', 10, 14),
 (89, 40, '3', 3, 5),
 (92, 41, '1', 2, 12),
-(93, 42, '3', 8, 10);
+(93, 42, '3', 8, 10),
+(94, 43, '1', 17, 22);
 
 -- --------------------------------------------------------
 
@@ -264,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `nounou` (
   `nb_notes` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idNounou`),
   KEY `idU_idx` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `nounou`
@@ -276,7 +289,13 @@ INSERT INTO `nounou` (`idNounou`, `revenu`, `telephone`, `idU`, `ville`, `experi
 (17, NULL, '06424242', 50, 'oui', 'gex', 'testbojeu', 'stpmarche', 1, 0, 25, 0),
 (18, NULL, '78953498', 51, 'oui', 'amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes amdrecnes ', 'John', 'Cena', 1, 0, 256, 0),
 (19, NULL, '800800800', 55, 'oui', 'rtgs', 'Sebastien', 'Patrick', 1, 4.42858, 800, 14),
-(20, NULL, '685412306+', 57, 'oui', 'toutes', 'Bern', 'Stephane', 1, 0, 540, 0);
+(20, NULL, '685412306+', 57, 'oui', 'toutes', 'Bern', 'Stephane', 1, 0, 540, 0),
+(21, NULL, '65846', 59, 'Troyes', 'rthsjkgnzlkerjztnzsrg', 'P', 'Stephanie', 1, 0, 24, 0),
+(22, NULL, '96543', 60, 'Troyes', 'ehserf dyhndfnbsrtnt', 'M', 'Paula', 1, 0, 29, 0),
+(23, NULL, '7985465', 61, 'Troyes', 'eryjgil dfgsdfjfyj', 'N', 'Olga', 1, 0, 26, 0),
+(24, NULL, '452754273', 62, 'Troyes', 'dhyjsd r hfgjukf drfgxdg,', 'H', 'Bob', 0, 0, 24, 0),
+(25, NULL, '978543549', 63, 'Troyes', 'eyrth zserhdhgy,d r hdstr,k', 'J', 'Helena', 0, 0, 23, 0),
+(26, NULL, '64862185', 64, 'Citadelle', 'N7', 'Shepard', 'John', 0, 0, 34, 0);
 
 -- --------------------------------------------------------
 
@@ -357,7 +376,25 @@ INSERT INTO `pratiquelangue` (`idN`, `langue`) VALUES
 (20, 'chinois'),
 (20, 'espagnol'),
 (20, 'francais'),
-(20, 'toutes');
+(20, 'toutes'),
+(21, ''),
+(21, 'anglais'),
+(21, 'francais'),
+(22, ''),
+(22, 'espagnol'),
+(22, 'francais'),
+(23, 'francais'),
+(23, 'Russe'),
+(24, ''),
+(24, 'allemand'),
+(24, 'anglais'),
+(24, 'francais'),
+(25, ''),
+(25, 'anglais'),
+(25, 'chinois'),
+(25, 'francais'),
+(26, 'anglais'),
+(26, 'Quarien');
 
 -- --------------------------------------------------------
 
@@ -376,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   PRIMARY KEY (`idReservation`),
   KEY `idParent` (`idParent`),
   KEY `idNounou` (`idNounou`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `reservation`
@@ -387,7 +424,8 @@ INSERT INTO `reservation` (`idParent`, `idNounou`, `idReservation`, `d_deb`, `d_
 (4, 20, 90, '2018-W27', '2018-W27', 0),
 (4, 19, 91, '2018-W27', '2018-W27', 0),
 (4, 19, 92, '2018-W02', '2018-W02', 0),
-(4, 20, 93, '2018-W27', '2018-W27', 0);
+(4, 20, 93, '2018-W27', '2018-W27', 0),
+(4, 21, 94, '2018-W24', '2018-W24', 0);
 
 -- --------------------------------------------------------
 
@@ -403,7 +441,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `type` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -422,7 +460,13 @@ INSERT INTO `utilisateur` (`mdp`, `ID`, `email`, `type`) VALUES
 ('patrick', 55, 'patrick@sebastien.fr', 1),
 ('parent', 56, 'parent@p.fr', 0),
 ('stephane', 57, 'stephane@bern.fr', 1),
-('xd', 58, 'xd@xd.xd', 0);
+('xd', 58, 'xd@xd.xd', 0),
+('steph', 59, 'steph@p.fr', 1),
+('paula', 60, 'paula@m.fr', 1),
+('olga', 61, 'olga@n.fr', 1),
+('bob', 62, 'bob@h.fr', 1),
+('helena', 63, 'helena@j.fr', 1),
+('normandy', 64, 'john@shepard.fr', 1);
 
 -- --------------------------------------------------------
 
