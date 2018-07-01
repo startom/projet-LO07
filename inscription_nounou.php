@@ -30,11 +30,11 @@
                 </p>
                 
                 <p>
-                <input id="lage" type="number" name="age" placeholder="Age" required="true">
+                <input id="lage" type="number" name="age" placeholder="Age" required="true" max="60">
                 </p>
                 
                 <p>
-                <input id="ltelephone" type="number" name="telephone" placeholder="Téléphone" required="true">
+                <input id="ltelephone" type="tel" name="telephone" placeholder="Téléphone" required="true">
                 </p>
                 
                 <p>
