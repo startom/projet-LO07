@@ -12,7 +12,7 @@
 
         <?php include("nav.php"); ?>
 
-        <h2 class="titre">Inscription parent sur [nom du site]</h2><br/>
+        <h2 class="titre">Inscription parent</h2><br/>
         <form class="formulaire" method="post" action="traitement_inscription.php">
             <div>
                 <p>

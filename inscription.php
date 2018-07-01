@@ -12,7 +12,7 @@
 
         <?php include("nav.php"); ?>
 
-        <h2 class="titre">Inscription sur [nom du site]</h2><br/>
+        <h2 class="titre">Inscription sur Nutrix</h2><br/>
         
         <div class="cadre">
             <p>
@@ -25,7 +25,7 @@
         </div>
 
         <footer>
-
+            <?php include("footer.php"); ?>
         </footer>
     </body>
 </html>

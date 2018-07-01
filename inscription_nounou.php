@@ -12,7 +12,7 @@
 
         <?php include("nav.php"); ?>
 
-        <h2 class="titre">Inscription nounou sur [nom du site]</h2><br/>
+        <h2 class="titre">Inscription nounou</h2><br/>
         <form class="signup_nounou" method="post" action="traitement_inscription.php">
             <div>
                 <fieldset>

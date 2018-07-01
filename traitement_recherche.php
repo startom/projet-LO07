@@ -3,8 +3,8 @@
 <html onmouseup="released();">
     <head>
         <title>Recherche</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="stylesheet" type="text/css" href="form.css">
+        <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+        <link rel="stylesheet" type="text/css" href="form2.css">
         <link rel="stylesheet" type="text/css" href="resa.css">
         <script type="text/javascript" src="resa.js"></script>
     </head>
@@ -18,7 +18,7 @@
         <?php
             
             if(isset($_SESSION['email'])){
-                $mysqli = new mysqli('localhost', 'root', '', 'mydb');
+                $mysqli = new mysqli('localhost', 'utilisateur', 'utilisateur', 'mydb');
                 if ($mysqli->connect_errno)
                 {
                         echo 'Erreur de connexion : errno: ' . $mysqli->errno . ' error: ' . $mysqli->error;
@@ -26,7 +26,7 @@
                 }
             }
             else {
-                $mysqli = new mysqli('localhost', 'root', '', 'mydb');
+                $mysqli = new mysqli('localhost', 'visiteur', 'visiteur', 'mydb');
                 if ($mysqli->connect_errno)
                 {
                         echo 'Erreur de connexion : errno: ' . $mysqli->errno . ' error: ' . $mysqli->error;
@@ -98,6 +98,7 @@
                     exit;
                 }
                 $i=0;
+                $idDispoJour=array();
                 while($get_info_idJour_d = $result->fetch_row()){
                     $idDispoJour[$i] = $get_info_idJour_d[0];
                     $idJour[$i] = $get_info_idJour_d[1];
@@ -162,6 +163,7 @@
                     exit;
                 }
                 $i=0;
+                $idDispoJour_r=array();
                 while($get_info_idJour_r = $result->fetch_row()){
                     $idDispoJour_r[$i] = $get_info_idJour_r[0];
                     $idJour_r[$i] = $get_info_idJour_r[1];
@@ -284,12 +286,45 @@
                         echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
                         exit;
                     }
-                    $info[$i][3] = $result->fetch_row();
+                    $info[$i][3]=array();
+                    $j=0;
+                    while($tmp = $result->fetch_row()){
+                        $info[$i][3][$j] = $tmp[0];
+                        $j++;
+                    }
                 }
+
+                if(isset($_SESSION['email'])){
+                    $sql='SELECT u.ID FROM utilisateur u WHERE u.email=\''.$_SESSION['email'].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                    $get_info_idU = $result->fetch_row();
+
+
+
+                    $sql='SELECT p.idParent FROM parent p WHERE p.idU = \''.$get_info_idU[0].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                    $get_info_idParent = $result->fetch_row();
+
+                    $sql='SELECT * FROM enfants e WHERE e.idParent=\''.$get_info_idParent[0].'\'';
+                    if (!$result = $mysqli->query($sql))
+                    {
+                        echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                        exit;
+                    }
+                }
+                
 
             ?>
 
-            <form>
+            <form method='post' action='traitement_resa.php'>
             <div class="horizontal">
                  <?php
 
@@ -359,9 +394,9 @@
                     }
 
                     for($j = 0;$j < 24; $j++){
-                        echo '<input type=\'hidden\' name=\''.$j.'\' id=\''.$j.'\' value=\'0\'>';
+                        echo '<input type=\'hidden\' name=\'h'.$j.'\' id=\'h'.$j.'\' value=\'0\'>';
                     }
-
+                    echo count($info);
                     echo '
                         <script type="text/javascript">
                             setup('.count($info).',24);
@@ -370,6 +405,30 @@
 
                 ?>
              </div>
+
+             <?php
+             if(isset($_SESSION['email'])){
+                $i=0;
+                 while($get_info_enfant = $result->fetch_row()){
+                    echo "<label for='e$i'>$get_info_enfant[2]</label>"; 
+                    echo "<input type='checkbox' id='e$i' name='e$i' value='$get_info_enfant[0]'><br/>";
+                    echo "<input type='hidden' id='eh$i' name='eh$i' value='$get_info_enfant[0]'><br/>";
+                    $i++;
+                 }
+                    
+                 echo "<input type='hidden' value='$get_info_idParent[0]' name='idParent'>";
+                 echo "<input type='hidden' value='".$_POST['date']."' name='date'>";
+                 echo "<input type='submit' value='Reserver'>";
+             }
+             else{
+                echo "Connectez-vous ou inscrivez-vous pour réserver";
+             }
+             
+
+             ?>
+
+
+
         </form>
 
         <footer>

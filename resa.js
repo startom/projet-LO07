@@ -68,7 +68,6 @@ function pressed(i,j)
 function released()
 {
 	phase = 0;
-
 	for (var x = 0; x < tableau.length; x++) {
 		for (var y = 0; y < tableau[0].length; y++) {
 			if(tableau[x][y] == -2)
@@ -77,29 +76,39 @@ function released()
 				tableau[x][y] = 1;
 		}
 	}
+
 }
 
 function update()
 {
-	for (var x = 0; x < tableau.length; x++) {
-		for (var y = 0; y < tableau[0].length; y++) {
+	for(var y = 0; y<tableau[0].length; y++)
+	{
+		var max = tableau[0][y], ind = 0;
+		for(x = 0; x < tableau.length; x++)
+		{
 			var button = document.getElementById(x+'-'+y);
-			var hidden = document.getElementById('h'+x+'-'+y);
-			var hidden2 = document.getElementById(y);
-
-			if(!document.getElementById(x+'-'+y).disabled)
+			if(!button.disabled)
 			{
-				if(tableau[x][y] > 0)
+				if(tableau[x][y] == 1 || tableau[x][y] == 2)
 				{
+					max = tableau[x][y];
+					ind = x;
 					button.style.backgroundColor = 'rgba(160,160,0,0.6)';
-					hidden2.value = hidden.value;
 				}
 				else
-				{
 					button.style.backgroundColor = 'rgba(160,160,160,0.5)';
-					hidden2.value = 0;
-				}
 			}
 		}
+		var hidden2 = document.getElementById('h'+y);
+		if(max == 1 || max == 2)
+		{
+			var hidden = document.getElementById('h'+ind+'-'+y);
+			hidden2.value = hidden.value;
+		}
+		else
+		{
+			hidden2.value = 0;
+		}
+
 	}
 }

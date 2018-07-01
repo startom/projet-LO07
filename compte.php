@@ -5,6 +5,7 @@
         <title>Mon compte</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript" src="js.js"></script>
+        <script type="text/javascript" src="note.js"></script>
     </head>
     <body>
         <header>
@@ -47,6 +48,29 @@
                 echo 'Nounou refusée <br/>';
             }
         }
+
+
+
+
+        if(isset($_POST['note']))
+        {
+            $nouv_note=($_POST['moy_notes']*$_POST['nb_notes']+$_POST['note'])/($_POST['nb_notes']+1);
+            $nouv_nb_notes = $_POST['nb_notes']+1;
+
+            $sql="UPDATE nounou SET note = $nouv_note, nb_notes = $nouv_nb_notes WHERE idNounou = ".$_POST['idNounou_note'].";";
+            $mysqli->query($sql);
+            echo $sql;
+            echo "<br/>";
+
+            $sql="UPDATE reservation SET statut = 1 WHERE idReservation = ".$_POST['idResa'].";";
+            $mysqli->query($sql);
+            echo $sql;
+        }
+
+
+
+
+
         
         
         
@@ -70,6 +94,11 @@
 
 
 
+
+
+
+
+
                 
                 
 
@@ -88,60 +117,87 @@
                         }
                         $get_info_idParent = $result->fetch_row();
                         
-                        $sql='SELECT Count(distinct e.idEnfant) AS nombre FROM enfants e WHERE idParent = \''.$get_info_idParent[0].'\'';
+                        $sql='SELECT * FROM enfants e WHERE idParent = \''.$get_info_idParent[0].'\'';
                         if (!$result = $mysqli->query($sql))
                         {
                             echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
                             exit;
                         }
-                        $get_info_nb_enfants = $result->fetch_row();
-                        
-                        echo 'Vous avez '.$get_info_nb_enfants[0].' enfants enregistré(s)<br/><br/>';
-                        
-                        for ($i = 0; $i < $get_info_nb_enfants[0]; $i++){
-                            //afficher les enfants
+                        $get_info_enfants = $result->fetch_row();
+
+                        if(!$get_info_enfants){
+                            echo "Vous n'avez pas d'enfants enregistrés <br/><br/>";
                         }
+                        else{
+                            echo "Enfants enregistrés: <br/>";
+                            while($get_info_enfants){
+                                echo $get_info_enfants[2]."<br/>";
+                                $get_info_enfants = $result->fetch_row();
+                            }
+                        }
+
                         ?>
                         <form method="post" action="enregistrer_enfant.php">
                             <input class='bout_dispo' type="submit" value="Enregistrer un enfant">
                         </form>
 
                         <?php
-
+                        echo "<br/>";
                         $sql='SELECT * FROM reservation r WHERE r.idParent =\''.$get_info_idParent[0].'\'';
                         if (!$result = $mysqli->query($sql))
                         {
                             echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
                             exit;
                         }
-                        $get_info_reservation = $result->fetch_row();
-
-                        while($get_info_reservation[4] = $result->fetch_row()){
-
-                        $annee = intval(substr($get_info_reservation[4],0,4));
-                        $semaine = intval(substr($get_info_reservation[4],6,2));
-                        $semaine = ($semaine + 1) % 53;
-                        if(!$semaine){
-                            $annee++;
-                        }
-                        $get_info_reservation[4] = $annee . "-W" . sprintf("%02d",$semaine);
-
-                            if(strtotime($get_info_reservation[4]) <= time()){
-                                echo "<form method='post' action='valider_prestation.php'><h4>Prestation à valider :</h4>";
-                                echo "<div class=texte> ";
-                                echo "<input type='submit value='Valider la prestation'> </form>";
-
-                                $date_semaine = $get_info_reservation[4];
-                                //$date_semaine .= 
 
 
-                                date("c",strtotime("2018-W05-5"));
+
+                        while($get_info_reservation = $result->fetch_row()){
+                            $annee = intval(substr($get_info_reservation[4],0,4));
+                            $semaine = intval(substr($get_info_reservation[4],6,2));
+                            $semaine = ($semaine + 1) % 53;
+                            if(!$semaine){
+                                $annee++;
+                            }
+                            $get_info_reservation[4] = $annee . "-W" . sprintf("%02d",$semaine);
+
+                            $sql='SELECT * FROM nounou n WHERE n.idNounou =\''.$get_info_reservation[1].'\'';
+                            if (!$result2 = $mysqli->query($sql))
+                            {
+                                echo "SELECT error in query " . $sql . " errno: " . $mysqli->errno . " error: " . $mysqli->error;
+                                exit;
+                            }
+                            $get_info_nounou_resa = $result2->fetch_row();
+
+                                if($get_info_reservation[5]==0 && strtotime($get_info_reservation[4]) <= time() ){
+                                    echo "<form method='post' action='#'><h4>Prestation à valider :</h4>";
+                                    echo "<div class=texte> ";
+                                    echo "Nounou: ".$get_info_nounou_resa[7]." ".$get_info_nounou_resa[6]."<br/>";
+                                    echo "Date: ".$get_info_reservation[3];
+                                    echo "<div class='horizontal'>";
+                                    echo "<img id='img1' src='couleur.png' onclick='clicked(1)' style='width: 50px; height: 50px;'>";
+                                    echo "<img id='img2' src='grey.png' onclick='clicked(2)' style='width: 50px; height: 50px;'>";
+                                    echo "<img id='img3' src='grey.png' onclick='clicked(3)' style='width: 50px; height: 50px;'>";
+                                    echo "<img id='img4' src='grey.png' onclick='clicked(4)' style='width: 50px; height: 50px;'>";
+                                    echo "<img id='img5' src='grey.png' onclick='clicked(5)' style='width: 50px; height: 50px;'>";
+                                    echo "</div>";
+                                    echo "<input type='hidden' value=".$get_info_nounou_resa[11]." name='nb_notes'>";
+                                    echo "<input type='hidden' value=".$get_info_nounou_resa[9]." name='moy_notes'>";
+                                    echo "<input type='hidden' value=".$get_info_nounou_resa[0]." name='idNounou_note'>";
+                                    echo "<input type='hidden' value=".$get_info_reservation[2]." name='idResa'>";
+                                    echo "<input type='submit' value='Valider la prestation'>";
+                                    echo "<input type='hidden' value='1' name='note' id='note'> </form>";
+                                    echo "</div>";
+
+                                    date("c",strtotime("2018-W05-5"));
                             }
                         }
                         
+
+                        
+                        
                         ?>
                     </div>
-        
                     <?php
                 }
 
